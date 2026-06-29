@@ -1,0 +1,33 @@
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Streamlit config and runtime
+# Keep config committed, ignore runtime metadata
+.streamlit/*.pyc
+
+# Generated or output files
+outputs/
+work/
+.pytest_cache/
+*.log
+debug_out.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Temporary files
+*.swp
+*~

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="40" y="56" fill="#0b1220" font-family="Arial" font-size="24">Demo Q&amp;A Result</text>
+
+  <g transform="translate(40,100)">
+    <rect width="920" height="120" rx="8" fill="#f8fafc" stroke="#e6eef8" />
+    <text x="20" y="36" fill="#0b1220" font-family="Arial" font-size="16">Question</text>
+    <text x="20" y="68" fill="#0b1220" font-family="Arial" font-size="14">What is this document about?</text>
+  </g>
+
+  <g transform="translate(40,240)">
+    <rect width="920" height="240" rx="8" fill="#fdfefe" stroke="#e6eef8" />
+    <text x="20" y="36" fill="#0b1220" font-family="Arial" font-size="16">Answer (from document)</text>
+    <foreignObject x="20" y="54" width="880" height="160">
+      <body xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial; font-size:14px; color:#0b1220;">
+        <p>This document is about testing frameworks and best practices for unit testing. The answer is pulled directly from the provided document chunks and does not include external information.</p>
+        <p style="color:#6b7280; font-size:12px;">Confidence: 0.72 &nbsp; • &nbsp; Source chunks: 3</p>
+      </body>
+    </foreignObject>
+  </g>
+
+  <text x="40" y="520" fill="#6b7280" font-family="Arial" font-size="12">Note: If the answer cannot be found, the app returns: "This information is not available in the document"</text>
+</svg>
