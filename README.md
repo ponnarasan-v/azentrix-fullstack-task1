@@ -1,138 +1,329 @@
-# Context-Aware Document Q&A Bot
+# 📄 Context-Aware Document Q&A Bot (RAG)
 
-A local Retrieval-Augmented Generation (RAG) app that answers questions using
-only uploaded PDFs or pasted text. It is built with Streamlit, FAISS,
-Sentence Transformers embeddings, LangChain, and a local Ollama model.
+A **Retrieval-Augmented Generation (RAG)** application that answers questions exclusively from uploaded documents. The system combines **semantic search**, **vector retrieval**, and a **locally hosted Large Language Model (LLM)** to generate accurate, context-grounded responses while minimizing hallucinations.
 
-## Key features
+Built using **Streamlit**, **LangChain**, **FAISS**, **Sentence Transformers**, and **Ollama**.
 
-- Upload PDF files or paste raw text.
-- Clean, chunk, embed, and index documents for retrieval.
-- Retrieve the most relevant source chunks with FAISS.
-- Answer questions only from the provided document context.
-- Return the exact refusal:
+---
+
+## 🚀 Features
+
+- 📄 Upload PDF documents or paste raw text
+- 🧹 Automatic text extraction and cleaning
+- ✂️ Intelligent document chunking
+- 🧠 Semantic embeddings using Sentence Transformers
+- 🔍 Fast similarity search with FAISS Vector Store
+- 🤖 Context-aware question answering using LangChain
+- 🦙 Local inference with Ollama (Llama 3.2)
+- 📊 Confidence score for generated responses
+- 📑 Display retrieved source chunks
+- 💬 Chat history support
+- 🚫 Hallucination prevention by answering only from document context
+- ⚡ Fully local execution without external API dependencies
+
+---
+
+# 🏗️ System Architecture
+
+<p align="center">
+  <img src="assets/Architecture.png" width="100%" alt="RAG Architecture">
+</p>
+
+The application follows a Retrieval-Augmented Generation (RAG) workflow:
+
+1. User uploads a PDF or pastes text.
+2. Document text is extracted and cleaned.
+3. Text is split into semantic chunks.
+4. Sentence Transformers generate embeddings.
+5. Embeddings are indexed using FAISS.
+6. User submits a question.
+7. Top-K relevant chunks are retrieved.
+8. LangChain combines retrieved context with the user query.
+9. Ollama generates a context-grounded response.
+10. The application displays the answer, confidence score, retrieved chunks, and chat history.
+
+---
+
+# 🖼️ Application Screenshots
+
+## Home Interface
+
+<p align="center">
+<img src="assets/document-upload-and-answer.png" width="90%">
+</p>
+
+---
+
+## Query Using Pasted Text
+
+<p align="center">
+<img src="assets/pasted-text-query.png" width="90%">
+</p>
+
+---
+
+## Retrieved Context
+
+<p align="center">
+<img src="assets/retrieved-context.png" width="90%">
+</p>
+
+---
+
+## Information Not Found Response
+
+<p align="center">
+<img src="assets/information-not-found-response.png" width="90%">
+</p>
+
+The application returns the following response whenever the requested information is unavailable in the uploaded document:
 
 ```text
 This information is not available in the document.
 ```
-- Display document statistics, source chunks, confidence, and chat history.
 
-## Repository structure
+---
 
-- `app.py` — Streamlit UI and application flow.
-- `rag_pipeline.py` — document ingestion, FAISS retrieval, and Ollama QA logic.
-- `requirements.txt` — runtime dependencies.
-- `requirements-dev.txt` — development and test dependencies.
-- `pyproject.toml` — project metadata and tooling configuration.
-- `tests/` — unit tests.
-- `scripts/debug_rag.py` — optional local debug helper.
-- `.github/workflows/python-app.yml` — GitHub Actions CI workflow.
-- `.streamlit/config.toml` — Streamlit server configuration.
-- `.gitignore` — files excluded from source control.
-- `LICENSE` — MIT license.
+# 🎥 Project Demo
 
-## Prerequisites
+A complete walkthrough of the application is available below.
 
-- Python 3.11 or newer
-- Ollama installed locally
-- Enough disk space for the Ollama model and sentence-transformer cache
+**Demo Video**
 
-## Installation
+```
+assets/demo.mp4
+```
 
-From the project root:
+After cloning the repository, open the video locally for a complete demonstration.
+
+---
+
+# 🛠️ Tech Stack
+
+| Category | Technologies |
+|-----------|--------------|
+| Programming Language | Python 3.11 |
+| Web Framework | Streamlit |
+| RAG Framework | LangChain |
+| Vector Database | FAISS |
+| Embedding Model | Sentence Transformers |
+| LLM | Ollama (Llama 3.2) |
+| PDF Processing | PyPDF2 |
+| Machine Learning | Hugging Face Transformers |
+| Testing | Pytest |
+| CI/CD | GitHub Actions |
+
+---
+
+# 📁 Repository Structure
+
+```
+Context-Aware-Document-QA-Bot/
+│
+├── .github/
+│   └── workflows/
+│
+├── .streamlit/
+│
+├── assets/
+│   ├── Architecture.png
+│   ├── demo.mp4
+│   ├── document-upload-and-answer.png
+│   ├── pasted-text-query.png
+│   ├── retrieved-context.png
+│   └── information-not-found-response.png
+│
+├── data/
+├── scripts/
+├── tests/
+│
+├── app.py
+├── rag_pipeline.py
+├── requirements.txt
+├── requirements-dev.txt
+├── pyproject.toml
+├── LICENSE
+├── README.md
+└── .gitignore
+```
+
+---
+
+# ⚙️ Installation
+
+## Clone the Repository
+
+```bash
+git clone https://github.com/ponnarasan-v/azentrix-fullstack-task1.git
+
+cd azentrix-fullstack-task1
+```
+
+---
+
+## Create Virtual Environment
+
+### Windows
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
+
+.\.venv\Scripts\activate
 ```
 
-On macOS or Linux:
+### Linux/macOS
 
 ```bash
+python -m venv .venv
+
 source .venv/bin/activate
-python -m pip install --upgrade pip
+```
+
+---
+
+## Install Dependencies
+
+```bash
+pip install --upgrade pip
+
 pip install -r requirements.txt
 ```
 
-## Ollama setup
+---
 
-Verify available models:
+# 🦙 Ollama Setup
+
+Verify installed models
 
 ```bash
 ollama list
 ```
 
-Pull the recommended default model:
+Pull the recommended model
 
 ```bash
 ollama pull llama3.2:3b
 ```
 
-Start the Ollama server:
+Start Ollama
 
 ```bash
 ollama serve
 ```
 
-## Run the application
+---
 
-With the virtual environment active:
+# ▶️ Run the Application
 
-```powershell
+```bash
 streamlit run app.py
 ```
 
-Open the URL shown by Streamlit, typically:
+Open your browser and visit
 
-```text
+```
 http://localhost:8501
 ```
 
-## Using the app
+---
 
-1. Upload PDFs or paste text in the sidebar.
-2. Choose an Ollama model if needed.
+# 💡 How to Use
+
+1. Launch the application.
+2. Upload a PDF or paste text.
 3. Click **Process Document**.
-4. Ask a question in the main area.
-5. Review the answer, the confidence score, and retrieved context.
+4. Enter your question.
+5. Review the generated response.
+6. Inspect the retrieved context and confidence score.
 
-## Recommended default model
+---
 
-The app defaults to `llama3.2:3b`. The sidebar lets you override it per session.
+# 🤖 Recommended Models
 
-- `tinyllama` — fastest, lowest resource usage, good for quick testing.
-- `llama3.2:3b` — recommended default for a good quality/speed balance.
-- `llama3:latest` / `mistral:latest` — higher quality but require more RAM and disk.
+| Model | Description |
+|--------|-------------|
+| llama3.2:3b | Recommended balance between speed and accuracy |
+| tinyllama | Lightweight model for quick testing |
+| mistral | Better reasoning capability |
+| llama3 | Higher-quality responses with larger resource requirements |
 
-> Do not use embedding-only models such as `nomic-embed-text:latest` as the chat model.
+> **Note:** Embedding models such as `nomic-embed-text` should only be used for generating embeddings and not as chat models.
 
-## Testing
+---
 
-Install development dependencies:
+# ✅ Testing
+
+Install development dependencies
 
 ```bash
 pip install -r requirements-dev.txt
 ```
 
-Run the unit tests:
+Run all tests
 
 ```bash
 pytest
 ```
 
-## Optional local debugging
+---
 
-Use the helper script for quick manual verification:
+# 🚀 Continuous Integration
 
-```bash
-python scripts/debug_rag.py
-```
+GitHub Actions automatically performs:
 
-## Troubleshooting
+- Dependency installation
+- Code quality checks
+- Unit testing
+- Build verification
 
-- If the app cannot reach Ollama, confirm the server is running and the model is pulled.
-- If a PDF has no extractable text, it may be scanned or image-only. Paste the text manually instead.
-- If the first run is slow, the embedding model may still be downloading or caching.
+for every push and pull request.
 
+---
+
+# 📌 Example Use Cases
+
+- Enterprise document search
+- Internal knowledge assistants
+- Research paper question answering
+- Technical documentation assistant
+- Policy and compliance document retrieval
+- Educational learning assistant
+- Local RAG experimentation
+
+---
+
+# 🔮 Future Enhancements
+
+- Multi-document retrieval
+- OCR support for scanned PDFs
+- Hybrid keyword + semantic search
+- Conversation memory
+- Source citation highlighting
+- Docker deployment
+- Cloud deployment
+- Multi-user authentication
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+# 👨‍💻 Author
+
+**Ponnarasan V**
+
+M.Tech in Computer Science & Engineering (AI & ML)
+
+**Areas of Interest**
+
+- Generative AI
+- Retrieval-Augmented Generation (RAG)
+- Large Language Models
+- Machine Learning
+- Deep Learning
+- Computer Vision
+
+---
